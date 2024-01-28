@@ -1,0 +1,7 @@
+data/
+Data/
+Images/
+.DS_Store
+
+# ipynb checkpoint
+.ipynb_checkpoints/
