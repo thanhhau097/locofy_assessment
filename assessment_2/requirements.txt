@@ -2,3 +2,4 @@ pydot
 torch
 torchvision
 transformers
+torch_geometric
