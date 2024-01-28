@@ -1,0 +1,4 @@
+pydot
+torch
+torchvision
+transformers
