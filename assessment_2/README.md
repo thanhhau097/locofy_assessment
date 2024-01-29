@@ -181,11 +181,6 @@ These are main ideas to improve the model. Think outside the box, we can also ha
 I'm happy to discuss more about the ideas to improve the model!
 
 ## Appendix
-### TODO:
-- [x] inference notebook
-- [x] Readme for documentation
-- [ ] Docker and fastapi
-
 ### Installation
 ```
 apt install graphviz
