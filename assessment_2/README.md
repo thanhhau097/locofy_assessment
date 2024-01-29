@@ -155,7 +155,7 @@ class Model(torch.nn.Module):
 For evaluation, we use F1 score, precision and recall as the metrics. We will use the F1 score of the positive class as the metric to evaluate the model. The positive class is the absolute elements. We will use the F1 score of the positive class as the metric because the dataset is imbalanced, the number of absolute elements is much smaller than the number of non-absolute elements. Therefore, the F1 score of the positive class will be a better metric to evaluate the model.
 
 ## Baseline Result
-Because of the limitation of time and resources, we only train the model on a small dataset. The dataset contains 5000 designs. We split the dataset into 4000 training samples and 1000 validation samples. We train the model for 100 epochs. The model achieves 0.7 F1 score on the validation set. The precision is 0.83 and the recall is 0.61. The model is overfitting on the training set. Therefore, we can improve the model by using a larger dataset and add more features to our dataset. We can also improve the model by using a better graph neural network architecture.
+Because of the limitation of time and resources, we only train the model on a small dataset. The dataset contains 5000 designs. We split the dataset into 4000 training samples and 1000 validation samples. We train the model for 100 epochs. The model achieves 0.77 F1 score on the validation set. The precision is 0.81 and the recall is 0.73. The model is overfitting on the training set. Therefore, we can improve the model by using a larger dataset and add more features to our dataset. We can also improve the model by using a better graph neural network architecture.
 
 | Model | F1 | Precision | Recall | Accuracy |
 | --- | --- | --- | --- | --- |
@@ -173,7 +173,12 @@ To do new inference, please see [inference.ipynb](inference.ipynb) for more deta
 - [ ] Add more features to the dataset, currently we only use the role attribue of elements in the design. We can add more features such as the attributes such as text, icon, etc.
 - [ ] Add image features to the dataset by using an image encoder to encode the screenshot of the design, then add/concatenate the image features to the node features or we can use cross-attention to combine the image features and the node features.
 - [ ] Use a better graph neural network architecture, we can use a more complex graph neural network architecture such as GAT, GIN, etc.
+- [ ] If we are going to apply the model to production to generate the code from Figma design, we should consider the tradeoff between the precision and recall, we can tweak the threshold of the model to get the best precision and recall for our use case.
+- [ ] The dataset is highly imbalanced, we should consider using a better training strategy for imbalanced dataset such as oversampling, undersampling, etc. We can also use weighted loss function to handle the imbalanced data problem.
 
+These are main ideas to improve the model. Think outside the box, we can also handle the problem by using other approaches such as object detection, object segmentation, etc. 
+
+I'm happy to discuss more about the ideas to improve the model!
 
 ## Appendix
 ### TODO:
