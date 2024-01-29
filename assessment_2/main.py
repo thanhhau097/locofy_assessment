@@ -126,7 +126,7 @@ def load_model():
         role_pad_idx=0,
     )
 
-    weights_path = "/home/thanh/experiments/gcn/assessment_2/outputs/model.safetensors"
+    weights_path = "./outputs/model.safetensors"
     model.load_state_dict(safetensors.torch.load_file(weights_path))
     model.eval()
 
