@@ -3,3 +3,6 @@ torch
 torchvision
 transformers
 torch_geometric
+ray[serve]
+fastapi
+starlette==0.34.0

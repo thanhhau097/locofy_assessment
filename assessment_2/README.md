@@ -172,7 +172,7 @@ The model can be trained in only **5 mins** and the size of the model is only 1M
 
 ## Appendix
 ### TODO:
-- [ ] inference notebook
+- [x] inference notebook
 - [x] Readme for documentation
 - [ ] Docker and fastapi
 
