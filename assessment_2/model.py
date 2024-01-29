@@ -72,12 +72,6 @@ class Model(torch.nn.Module):
         # use to_dense_batch to convert x to batched tensor
         x, _ = to_dense_batch(x, batch=batch)
 
-        # if x.shape[1] != x_role.shape[1]:
-        #     import pdb; pdb.set_trace()
-        #     print(batch)
-        #     print(x.shape)
-        #     print(x_layout.shape, x_role.shape)
-
         # pass though conv layers
         for conv in self.convs:
             x = conv(x, edge_index).relu()
