@@ -10,6 +10,7 @@ RUN apt install graphviz -y
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
+RUN pip install starlette==0.34.0 pydantic==2.5.3
 
 WORKDIR /workspace
 ADD . /workspace
