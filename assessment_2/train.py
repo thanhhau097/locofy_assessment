@@ -75,7 +75,7 @@ def main():
 
         for node in data["nodes"]:
             ROLES.add(node["role"])
-    ROLES = ["<PAD_TOKEN>"] + list(ROLES)
+    ROLES = ["<PAD_TOKEN>"] + sorted(list(ROLES))
 
     # split train val
     random.seed(42)

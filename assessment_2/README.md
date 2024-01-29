@@ -157,9 +157,9 @@ For evaluation, we use F1 score, precision and recall as the metrics. We will us
 ## Baseline Result
 Because of the limitation of time and resources, we only train the model on a small dataset. The dataset contains 5000 designs. We split the dataset into 4000 training samples and 1000 validation samples. We train the model for 100 epochs. The model achieves 0.7 F1 score on the validation set. The precision is 0.83 and the recall is 0.61. The model is overfitting on the training set. Therefore, we can improve the model by using a larger dataset and add more features to our dataset. We can also improve the model by using a better graph neural network architecture.
 
-| Model | F1 | Precision | Recall |
-| --- | --- | --- | --- |
-| GCN | 0.70 | 0.83 | 0.61 |
+| Model | F1 | Precision | Recall | Accuracy |
+| --- | --- | --- | --- | --- |
+| GCN | 0.77 | 0.81 | 0.73 | 0.99 |
 
 The model can be trained in only **5 mins** and the size of the model is only 1MB. Therefore, we can deploy the model to production easily on CPU instances.
 

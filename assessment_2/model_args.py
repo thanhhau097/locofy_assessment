@@ -10,7 +10,7 @@ class ModelArguments:
 
     resume: Optional[str] = field(default=None, metadata={"help": "Path of model checkpoint"})
     hidden_channels: str = field(
-        default="32,48,64,84",
+        default="64,64,64,64",
         metadata={"help": "Hidden channels for graph convolutions"},
     )
     graph_in: int = field(default=256, metadata={"help": "input graph embedding size"})

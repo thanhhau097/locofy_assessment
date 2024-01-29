@@ -61,6 +61,12 @@ class AbsoluteDataset(Dataset):
             return self.__getitem__(random.randint(0, len(self) - 1))
 
         target = [node["is_absolute"] for node in nodes]
+
+        # set target = 0 for those node that has h = 0 or w = 0
+        for i, (t, box) in enumerate(zip(target, boxes)):
+            if box[2] == 0 or box[3] == 0:
+                target[i] = 0
+        
         target = torch.tensor(target, dtype=torch.long)
         return layout_feat, role_feat, edge_index, target
 
