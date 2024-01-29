@@ -3,5 +3,6 @@ Data/
 Images/
 .DS_Store
 
-# ipynb checkpoint
 .ipynb_checkpoints/
+outputs/
+__pycache__/

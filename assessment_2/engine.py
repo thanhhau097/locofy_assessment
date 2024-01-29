@@ -3,19 +3,16 @@ from typing import Dict
 
 import numpy as np
 import torch
-import torch.nn.functional as F
+from sklearn.metrics import (accuracy_score, f1_score, precision_score,
+                             recall_score)
 from torch import nn
 from transformers import Trainer
-from transformers.trainer_pt_utils import nested_detach
-from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report, accuracy_score, f1_score
 
 
 class CustomTrainer(Trainer):
-    def __init__(self, data_type="tile", **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.data_type = data_type
-        self.loss_fn = nn.BCELoss()
+        self.loss_fn = nn.CrossEntropyLoss()
 
     def compute_loss(self, model: any, inputs: Dict, return_outputs=False):
         device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -25,7 +22,9 @@ class CustomTrainer(Trainer):
             inputs["role_feat"],
             inputs["edge_index"],
         )
-        loss = self.loss_fn(outputs, inputs["target"].to(device))
+        loss = self.loss_fn(
+            outputs.view(-1, outputs.size(-1)), inputs["target"].to(device).view(-1)
+        )
 
         if return_outputs:
             return (loss, outputs)
@@ -81,26 +80,28 @@ class CustomTrainer(Trainer):
 
         gc.collect()
 
-        predictions = outputs.cpu().detach()
-        return loss, predictions, inputs["target"].cpu().detach()
+        predictions = outputs.reshape(-1, 2).cpu().detach()
+        return loss, predictions, inputs["target"].reshape(-1).cpu().detach()
 
 
 def compute_metrics_fn(eval_preds):
     predictions, labels = eval_preds
 
-    predictions = torch.sigmoid(predictions)
+    predictions = torch.softmax(torch.tensor(predictions), dim=-1)
     predictions = predictions.cpu().detach().numpy()
-    labels = labels.cpu().detach().numpy()
-    
-    predictions = np.where(predictions > 0.5, 1, 0)
-    
-    report = classification_report(labels, predictions, output_dict=True)    
-    print(report)
-    
+
+    predictions = np.argmax(predictions, axis=1)
+
+    # report = classification_report(labels, predictions, output_dict=True)
+
     acc = accuracy_score(labels, predictions)
     f1 = f1_score(labels, predictions)
-    
+    precision = precision_score(labels, predictions)
+    recall = recall_score(labels, predictions)
+
     return {
         "accuracy": acc,
         "f1": f1,
+        "precision": precision,
+        "recall": recall,
     }
